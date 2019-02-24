@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+test_script.py
+CSV/
+jupyter/work/baseball_data_script/utiltest.ipynb

@@ -9,6 +9,7 @@ class PlayerResource(resources.ModelResource):
 
     class Meta:
         model = Player
+        # ここに、CSVにIdがなくても自動生成してくれるような処理を追加する
     
     
     fields = ('no', 'name', 'position', 'born', 'age', 'years', 'height', 'weight', 'blood', 'pi_pa', 'place', 'salary')

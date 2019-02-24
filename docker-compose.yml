@@ -18,3 +18,9 @@ services:
       - "8000:8000"
     depends_on:
       - db
+  jupyter:
+    build: jupyter
+    volumes:
+      - ./jupyter/work/:/home/jovyan/work/
+    ports:
+      - '8888:8888'
