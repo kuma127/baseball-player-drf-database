@@ -5,3 +5,10 @@ django-bootstrap4==0.0.7
 django-filter==2.0.0
 django-import-export==1.2.0
 djangorestframework==3.9.1
+django-extensions==2.1.6
+numpy
+jupyter
+notebook
+pandas
+bokeh
+matplotlib
