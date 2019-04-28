@@ -12,3 +12,4 @@ notebook
 pandas
 bokeh
 matplotlib
+requests
