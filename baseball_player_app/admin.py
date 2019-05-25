@@ -4,6 +4,9 @@ from import_export.admin import ImportExportModelAdmin
 from import_export.widgets import Widget
 
 from .models.player import Player
+from .models.player_result import PlayerResult
+
+admin.site.register(PlayerResult)
 
 class PlayerResource(resources.ModelResource):
 

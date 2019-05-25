@@ -1,1 +1,2 @@
 from baseball_player_app.models.player import Player
+from baseball_player_app.models.player_result import PlayerResult
