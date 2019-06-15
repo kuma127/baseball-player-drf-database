@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'import_export',
     'django_extensions',
+    'django_filters', 
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +134,7 @@ NOTEBOOK_ARGUMENTS = [
     '--port', '8888',
     '--allow-root',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',) 
+}

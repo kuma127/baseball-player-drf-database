@@ -21,6 +21,9 @@ class PlayerSerializer(serializers.ModelSerializer):
             'salary')
 
 class PlayerResultSerializer(serializers.ModelSerializer):
+
+    player = PlayerSerializer()
+
     class Meta:
         model = PlayerResult
         fields = (

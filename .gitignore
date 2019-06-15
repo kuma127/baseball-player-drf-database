@@ -106,3 +106,4 @@ venv.bak/
 *.ipynb
 memo.txt
 BattingData180831.py
+*.csv
