@@ -14,8 +14,8 @@ class PlayerResource(resources.ModelResource):
         model = Player
     
     
-    fields = ('no', 'name', 'position', 'born', 'age', 'years', 'height', 'weight', 'blood', 'pi_pa', 'place', 'salary')
-    export_order = ('no', 'name', 'position', 'born', 'age', 'years', 'height', 'weight', 'blood', 'pi_pa', 'place', 'salary')
+    fields = ('no', 'name', 'position', 'born', 'age', 'years', 'height', 'weight', 'blood', 'pi_pa', 'place', 'salary', 'team', 'info_year')
+    export_order = ('no', 'name', 'position', 'born', 'age', 'years', 'height', 'weight', 'blood', 'pi_pa', 'place', 'salary', 'team', 'info_year')
 
 @admin.register(Player)
 class PlayerAdmin(ImportExportModelAdmin):

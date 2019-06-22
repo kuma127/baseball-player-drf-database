@@ -13,10 +13,11 @@ class PlayerFilter(filters.FilterSet):
 
     no = filters.NumberFilter(lookup_expr='gt')
     name = filters.CharFilter(lookup_expr='icontains')
+    team = filters.CharFilter(lookup_expr='icontains')
 
     class Meta:
         model = Player
-        fields = ['no', 'name']
+        fields = ['no', 'name', 'team']
 
 class PlayerViewSet(viewsets.ModelViewSet):
     queryset = Player.objects.all()

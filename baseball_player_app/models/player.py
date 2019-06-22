@@ -28,6 +28,8 @@ class Player(models.Model):
     pi_pa = models.CharField(max_length=255)
     place = models.CharField(max_length=255)
     salary = models.IntegerField(default=0)
+    team = models.CharField(max_length=255, default="")
+    info_year = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

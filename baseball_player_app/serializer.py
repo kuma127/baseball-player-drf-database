@@ -18,7 +18,9 @@ class PlayerSerializer(serializers.ModelSerializer):
             'blood',
             'pi_pa',
             'place',
-            'salary')
+            'salary',
+            'team',
+            'info_year')
 
 class PlayerResultSerializer(serializers.ModelSerializer):
 

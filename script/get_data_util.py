@@ -1,10 +1,17 @@
-# キャッシュ化しましょう
-# 目的に合わせてゴロとか打球方向別とかにマージすべき
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE","baseball_player_drf_database.settings")
+import django
+django.setup()
+
 import pandas as pd
 import numpy as np
 import requests
 import json
 import copy
+from datetime import datetime as dt
+from baseball_player_app.models.player import Player
+from baseball_player_app.models.player_result import PlayerResult
+from django.db.models import Max
 
 column_data = ['AVG','B','DAJUN','DASU','DATEN','FD','GIDA','GIHI','GS','HIT','R1','R2','R3','S','SANSHIN','SC','ST','TENSA','VS','WL','HR','ICHI','KAI','OUT','QJO']
 column_data_all = ['MD','QJO','VS','GS','WL','ICHI','DAJUN','AVG','DASU','HIT','HR','DATEN','FD','ST','GIDA','GIHI','SANSHIN','KAI','SC','TENSA','OUT','R1','R2','R3','B','S','RE']
@@ -79,3 +86,114 @@ def get_result_count(df):
     df_new.sort_values('count', ascending=False, inplace=True)
     
     return df_new
+
+def read_csv_result(url):
+    result = pd.read_csv(url)
+    result.rename(columns=
+        {
+            'MD': 'date',
+            'QJO': 'stadium',
+            'VS': 'vs',
+            'GS': 'result_score',
+            'WL': 'win_lose',
+            'ICHI': 'position',
+            'DAJUN': 'order',
+            'AVG': 'avg',
+            'DASU': 'at_bat',
+            'HIT': 'hit',
+            'HR': 'hr',
+            'DATEN': 'rbi',
+            'FD': 'bb_hbp',
+            'ST': 'stolen_bases',
+            'GIDA': 'sacrifice_bunts',
+            'GIHI': 'sacrifice_flies',
+            'SANSHIN': 'strike_outs',
+            'KAI': 'innings',
+            'SC': 'middle_score',
+            'TENSA': 'difference',
+            'OUT': 'out_count',
+            'R1': 'first_runner',
+            'R2': 'second_runner',
+            'R3': 'third_runner',
+            'B': 'ball_count',
+            'S': 'strike_count',
+            'RE': 'result'
+        }, 
+        inplace=True)
+
+    return result
+
+def trans_df_to_queryset(df, player):
+    for record in df.itertuples():
+        PlayerResult.objects.create(
+            date=dt.strptime(record.date, '%Y/%m/%d'),
+            stadium=record.stadium,
+            vs=record.vs,
+            result_score=record.result_score,
+            win_lose=record.win_lose,
+            position=record.position,
+            order=record.order,
+            avg=record.avg,
+            at_bat=record.at_bat,
+            hit=record.hit,
+            hr=record.hr,
+            rbi=record.rbi,
+            bb_hbp=record.bb_hbp,
+            stolen_bases=record.stolen_bases,
+            sacrifice_bunts=record.sacrifice_bunts,
+            sacrifice_flies=record.sacrifice_flies,
+            strike_outs=record.strike_outs,
+            innings=record.innings,
+            middle_score=record.middle_score,
+            difference=record.difference,
+            out_count=record.out_count,
+            first_runner=record.first_runner,
+            second_runner=record.second_runner,
+            third_runner=record.third_runner,
+            ball_count=record.ball_count,
+            strike_count=record.strike_count,
+            result=record.result,
+            player=player
+        )
+    return
+
+# プロ野球データFreakの選手名鑑をDataFrameとして取得
+def get_player_list(url, team, year):
+
+    # ウェブページから読み込み
+    df = pd.read_html(url)
+
+    df = df[0]
+
+    # カラム名の修正
+    df.rename(columns={'No.': 'no'}, inplace=True)
+    df.rename(columns={'選手名': 'name'}, inplace=True)
+    df.rename(columns={'守備': 'position'}, inplace=True)
+    df.rename(columns={'生年月日': 'born'}, inplace=True)
+    df.rename(columns={'年齢': 'age'}, inplace=True)
+    df.rename(columns={'年数': 'years'}, inplace=True)
+    df.rename(columns={'身長': 'height'}, inplace=True)
+    df.rename(columns={'体重': 'weight'}, inplace=True)
+    df.rename(columns={'血液型': 'blood'}, inplace=True)
+    df.rename(columns={'投打': 'pi_pa'}, inplace=True)
+    df.rename(columns={'出身地': 'place'}, inplace=True)
+    df.rename(columns={'年俸(推定)': 'salary'}, inplace=True)
+
+    # 新規カラム追加
+    df['team'] = team
+    df['info_year'] = year
+
+    # 不要な文言を削除
+    df['age'] = df['age'].str.replace('歳', '')
+    df['years'] = df['years'].str.replace('年', '')
+    df['height'] = df['height'].str.replace('cm', '')
+    df['blood'] = df['blood'].str.replace('型', '')
+    df['weight'] = df['weight'].str.replace('kg', '')
+    df['salary'] = df['salary'].str.replace('万円', '')
+    df['salary'] = df['salary'].str.replace(',', '')
+
+    # データ整形
+    df['born'] = df['born'].str.replace('/', '-')
+    df['id'] = Player.objects.all().aggregate(Max('id'))['id__max'] + 1 + df.index
+
+    return df
