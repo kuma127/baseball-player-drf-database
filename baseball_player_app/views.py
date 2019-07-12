@@ -7,7 +7,8 @@ from rest_framework import viewsets
 
 from .models.player import Player
 from .models.player_result import PlayerResult
-from .serializer import PlayerSerializer, PlayerResultSerializer
+from .models.player_batting_stats import PlayerBattingStats
+from .serializer import PlayerSerializer, PlayerResultSerializer, PlayerBattingStatsSerializer
 
 class PlayerFilter(filters.FilterSet):
 
@@ -38,3 +39,17 @@ class PlayerResultViewSet(viewsets.ModelViewSet):
     queryset = PlayerResult.objects.all()
     serializer_class = PlayerResultSerializer
     filter_class = PlayerResultFilter
+
+class PlayerBattingStatsFilter(filters.FilterSet):
+
+    player__name = filters.CharFilter(lookup_expr='icontains')
+    year = filters.NumberFilter(lookup_expr='gt')
+
+    class Meta:
+        model = PlayerBattingStats
+        fields = ['player', 'year']
+
+class PlayerBattingStatsViewSet(viewsets.ModelViewSet):
+    queryset = PlayerBattingStats.objects.all()
+    serializer_class = PlayerBattingStatsSerializer
+    filter_class = PlayerBattingStatsFilter

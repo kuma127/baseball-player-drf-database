@@ -13,7 +13,7 @@ class Player(models.Model):
         (POSITION_OUTFIELDER, "外野手"),
     )
 
-    no = models.IntegerField(default=0)
+    no = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     position = models.CharField(
         choices=POSITION_SET,

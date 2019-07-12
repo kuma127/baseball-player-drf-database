@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models.player import Player
 from .models.player_result import PlayerResult
+from .models.player_batting_stats import PlayerBattingStats
 
 class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -57,4 +58,37 @@ class PlayerResultSerializer(serializers.ModelSerializer):
             'strike_count',
             'result',
             'player'
+        )
+
+class PlayerBattingStatsSerializer(serializers.ModelSerializer):
+
+    player = PlayerSerializer()
+
+    class Meta:
+        model = PlayerBattingStats
+        fields = (
+            'player',
+            'year',
+            'avg',
+            'game',
+            'plate_appearances',
+            'at_bats',
+            'runs_scored',
+            'hits',
+            'two_base_hits',
+            'three_base_hits',
+            'home_runs',
+            'total_bases',
+            'runs_batted_in',
+            'stolen_bases',
+            'caught_stealing',
+            'sacrifice_bunts',
+            'sacrifice_flies',
+            'bases_on_balls',
+            'intentional_walk',
+            'hit_by_pitch',
+            'strike_outs',
+            'double_plays',
+            'on_base_percentage',
+            'slugging_percentage'
         )

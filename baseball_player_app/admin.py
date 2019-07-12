@@ -5,8 +5,10 @@ from import_export.widgets import Widget
 
 from .models.player import Player
 from .models.player_result import PlayerResult
+from .models.player_batting_stats import PlayerBattingStats
 
 admin.site.register(PlayerResult)
+admin.site.register(PlayerBattingStats)
 
 class PlayerResource(resources.ModelResource):
 
