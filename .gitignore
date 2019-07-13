@@ -108,3 +108,6 @@ memo.txt
 BattingData180831.py
 *.csv
 .vscode/
+
+# front
+baseball_player_front/node_modules/*

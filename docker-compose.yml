@@ -19,3 +19,13 @@ services:
       - "8888:8888"
     depends_on:
       - db
+  frontend:
+    build:
+      context: ./Docker-front
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/code
+    stdin_open: true
+    tty: true
+    command: '/code/Docker-front/start-server.sh'
