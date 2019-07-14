@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-    <HelloWorld msg="やきうの時間だあああああああ"/>
+    <router-view />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SearchPlayer from './components/SearchPlayer.vue'
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
+  name: 'app'
 }
 </script>
 

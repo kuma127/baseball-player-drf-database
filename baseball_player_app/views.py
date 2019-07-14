@@ -12,7 +12,7 @@ from .serializer import PlayerSerializer, PlayerResultSerializer, PlayerBattingS
 
 class PlayerFilter(filters.FilterSet):
 
-    no = filters.NumberFilter(lookup_expr='gt')
+    no   = filters.CharFilter(lookup_expr='exact')
     name = filters.CharFilter(lookup_expr='icontains')
     team = filters.CharFilter(lookup_expr='icontains')
 
@@ -43,7 +43,7 @@ class PlayerResultViewSet(viewsets.ModelViewSet):
 class PlayerBattingStatsFilter(filters.FilterSet):
 
     player__name = filters.CharFilter(lookup_expr='icontains')
-    year = filters.NumberFilter(lookup_expr='gt')
+    year = filters.NumberFilter(lookup_expr='exact')
 
     class Meta:
         model = PlayerBattingStats
