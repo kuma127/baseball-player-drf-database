@@ -1,17 +1,6 @@
 <template>
   <div class="hello">
     <h1>やきうの時間だあああああああ</h1>
-    <div v-if="playerData">
-      <router-link :to="{ path: '/stats/' + playerData.id }">{{ playerData.name }}</router-link>
-      <label>チーム：{{ playerData.team }}  背番号：{{ playerData.no }}</label>
-    </div>
-    <label>1名検索！！！</label>
-    <div class="inputData">
-      <p>ID：</p><input type="number" v-model="playerId" min="0">
-    </div>
-    <button @click="testFunc">選手名表示</button>
-    <br/>
-    <label>複数検索！！！</label>
     <div class="inputData">
       <p>背番号：</p><input type="text" v-model="no">
     </div>
@@ -31,9 +20,19 @@
       <button @click="searchPlayer">検索</button>
       <button @click="clearData">クリア</button>
     </div>
-    <div v-for="pData in playerDataList" v-bind:key="pData.id">
-      <router-link :to="{ path: '/stats/' + pData.id }">{{ pData.name }}</router-link>
-      <label>チーム：{{ pData.team }}  背番号：{{ pData.no }}</label>
+    <div>
+    <vue-good-table
+      :columns="columns"
+      :rows="playerDataList">
+      <template slot="table-row" slot-scope="props">
+        <span v-if="props.column.field == 'name'">
+          <router-link :to="{ path: '/stats/' + props.row.id }">{{props.row.name}}</router-link>
+        </span>
+        <span v-else>
+          {{props.formattedRow[props.column.field]}}
+        </span>
+      </template>
+    </vue-good-table>
     </div>
   </div>
 </template>
@@ -47,10 +46,28 @@ export default {
       playerData: null,
       playerDataList: [],
       playerId: 0,
-      teamList: ['YS', 'YB', 'L', 'H'],
+      teamList: ['C', 'YS', 'G', 'YB', 'D', 'T', 'L', 'H', 'F', 'B', 'M', 'E'],
       no: '',
       name: '',
       team: '',
+      columns: [
+        {
+          label: '背番号',
+          field: 'no',
+        },
+        {
+          label: '名前',
+          field: 'name',
+        },
+        {
+          label: 'チーム',
+          field: 'team',
+        },
+        {
+          label: 'ポジション',
+          field: 'position',
+        },
+      ],
     }
   },
   methods: {

@@ -1,12 +1,11 @@
 <template>
-  <div class="hello" v-if="playerStats">
-    <h1>成績！</h1>
-    <div class="stats">
-      <p>{{ playerStats.player.name }} {{ playerStats.year }}年</p>
-      <p>打率： {{ playerStats.avg }}</p>
-      <p>本塁打： {{ playerStats.homeRuns }}</p>
-      <p>打点：{{ playerStats.runsBattedIn }}</p>
-    </div>
+  <div class="hello">
+    <h1>成績</h1>
+    <vue-good-table
+      :columns="columns"
+      :rows="rows">
+    </vue-good-table>
+    <router-link :to="{ path: '/' }">戻る</router-link>
   </div>
 </template>
 
@@ -17,6 +16,30 @@ export default {
   data() {
     return {
       playerStats: null,
+      columns: [
+        {
+          label: '選手名',
+          field: 'prop',
+        },
+        {
+          label: '',
+          field: 'value',
+        },
+      ],
+      rows: [
+        {
+          prop: '打率',
+          value: ''
+        },
+        {
+          prop: '本塁打',
+          value: ''
+        },
+        {
+          prop: '打点',
+          value: ''
+        },
+      ]
     }
   },
   methods: {
@@ -26,6 +49,10 @@ export default {
         year: 2018,
       });
       this.playerStats = DataList[0];
+      this.columns[1].label = DataList[0].player.name;
+      this.rows[0].value = DataList[0].avg;
+      this.rows[1].value = DataList[0].homeRuns;
+      this.rows[2].value = DataList[0].runsBattedIn;
     }
   },
   created() {
