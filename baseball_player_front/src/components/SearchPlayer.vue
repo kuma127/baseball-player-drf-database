@@ -26,7 +26,7 @@
       :rows="playerDataList">
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'name'">
-          <router-link :to="{ path: '/stats/' + props.row.id }">{{props.row.name}}</router-link>
+          <router-link :to="{ path: '/batting-stats/' + props.row.id }">{{props.row.name}}</router-link>
         </span>
         <span v-else>
           {{props.formattedRow[props.column.field]}}

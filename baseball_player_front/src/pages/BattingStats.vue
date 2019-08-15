@@ -12,7 +12,7 @@
 <script>
 import BaseballClient from '../services/api';
 export default {
-  name: 'PlayerStats',
+  name: 'BattingStats',
   data() {
     return {
       playerStats: null,
@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     async getStats() {
-      const DataList = await BaseballClient.getFilteredPlayerStats({
+      const DataList = await BaseballClient.getFilteredBattingStats({
         playerId: this.$route.params.playerId,
         year: 2018,
       });

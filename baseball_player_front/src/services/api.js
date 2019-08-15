@@ -59,7 +59,7 @@ class BaseballClient extends Client {
         return response.data;
     }
 
-    async getFilteredPlayerStats({playerId, year}) {
+    async getFilteredBattingStats({playerId, year}) {
         const response = await this._get(`${this.baseUrl}/batting-stats/?player=${playerId}&year=${year}&player__name=`);
         return response.data;
     }

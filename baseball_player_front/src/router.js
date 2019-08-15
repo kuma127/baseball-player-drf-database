@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import SearchPlayer from '@/components/SearchPlayer';
-import PlayerStats from '@/pages/PlayerStats'
+import BattingStats from '@/pages/BattingStats'
 
 Vue.use(VueRouter)
 
@@ -9,7 +9,7 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         { path: '/', component: SearchPlayer },
-        { path: '/stats/:playerId', component: PlayerStats },
+        { path: '/batting-stats/:playerId', component: BattingStats },
         { path: '*', redirect: '/'},
     ]
 })
