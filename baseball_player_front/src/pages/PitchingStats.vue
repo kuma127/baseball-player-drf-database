@@ -12,7 +12,7 @@
 <script>
 import BaseballClient from '../services/api';
 export default {
-  name: 'BattingStats',
+  name: 'PitchingStats',
   data() {
     return {
       playerStats: null,
@@ -28,27 +28,31 @@ export default {
       ],
       rows: [
         {
-          prop: '打率',
+          prop: '試合数',
           value: ''
         },
         {
-          prop: '本塁打',
+          prop: '防御率',
           value: ''
         },
         {
-          prop: '打点',
+          prop: '勝利数',
           value: ''
         },
         {
-          prop: '出塁率',
+          prop: '敗戦数',
           value: ''
         },
         {
-          prop: '長打率',
+          prop: 'ホールドポイント',
           value: ''
         },
         {
-          prop: 'OPS',
+          prop: 'セーブ',
+          value: ''
+        },
+        {
+          prop: '投球回',
           value: ''
         },
       ]
@@ -56,18 +60,19 @@ export default {
   },
   methods: {
     async getStats() {
-      const DataList = await BaseballClient.getFilteredBattingStats({
+      const DataList = await BaseballClient.getFilteredPitchingStats({
         playerId: this.$route.params.playerId,
         year: 2018,
       });
       this.playerStats = DataList[0];
       this.columns[1].label = DataList[0].player.name;
-      this.rows[0].value = DataList[0].avg;
-      this.rows[1].value = DataList[0].homeRuns;
-      this.rows[2].value = DataList[0].runsBattedIn;
-      this.rows[3].value = DataList[0].onBasePercentage;
-      this.rows[4].value = DataList[0].sluggingPercentage;
-      this.rows[5].value = Number(DataList[0].onBasePercentage) + Number(DataList[0].sluggingPercentage);
+      this.rows[0].value = DataList[0].game;
+      this.rows[1].value = DataList[0].earnedRunAverage;
+      this.rows[2].value = DataList[0].wins;
+      this.rows[3].value = DataList[0].losses;
+      this.rows[4].value = DataList[0].holdPoints;
+      this.rows[5].value = DataList[0].saves;
+      this.rows[6].value = DataList[0].inningsPitched;
     }
   },
   created() {

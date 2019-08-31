@@ -25,7 +25,10 @@
       :columns="columns"
       :rows="playerDataList">
       <template slot="table-row" slot-scope="props">
-        <span v-if="props.column.field == 'name'">
+        <span v-if="props.column.field == 'name' && props.row.position == '投手'">
+          <router-link :to="{ path: '/pitching-stats/' + props.row.id }">{{props.row.name}}</router-link>
+        </span>
+        <span v-else-if="props.column.field == 'name' && props.row.position != '投手'">
           <router-link :to="{ path: '/batting-stats/' + props.row.id }">{{props.row.name}}</router-link>
         </span>
         <span v-else>
