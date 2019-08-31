@@ -63,6 +63,11 @@ class BaseballClient extends Client {
         const response = await this._get(`${this.baseUrl}/batting-stats/?player=${playerId}&year=${year}&player__name=`);
         return response.data;
     }
+
+    async getFilteredPitchingStats({playerId, year}) {
+        const response = await this._get(`${this.baseUrl}/pitching-stats/?player=${playerId}&year=${year}&player__name=`);
+        return response.data;
+    }
 }
 
 export default new BaseballClient();
