@@ -1,7 +1,6 @@
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE","baseball_player_drf_database.settings")
 import django
-
 django.setup()
 
 from baseball_player_app.models.player import Player
