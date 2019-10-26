@@ -22,6 +22,7 @@
     </div>
     <div>
     <vue-good-table
+      class="player-table"
       :columns="columns"
       :rows="playerDataList">
       <template slot="table-row" slot-scope="props">
@@ -105,5 +106,9 @@ export default {
 }
 button {
   margin: .5em;
+}
+.player-table {
+  width: 50%;
+  margin: 0 auto;
 }
 </style>

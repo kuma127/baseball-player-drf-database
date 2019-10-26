@@ -8,9 +8,12 @@ from .models.player_result import PlayerResult
 from .models.player_batting_stats import PlayerBattingStats
 from .models.player_pitching_stats import PlayerPitchingStats
 
+from .models.test_model import TestModel
+
 admin.site.register(PlayerResult)
 admin.site.register(PlayerBattingStats)
 admin.site.register(PlayerPitchingStats)
+admin.site.register(TestModel)
 
 class PlayerResource(resources.ModelResource):
 

@@ -2,6 +2,7 @@
   <div class="hello">
     <h1>成績</h1>
     <vue-good-table
+      class="stats-table"
       :columns="columns"
       :rows="rows">
     </vue-good-table>
@@ -83,7 +84,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.stats {
-  display: grid;
+.stats-table {
+  width: 50%;
+  margin: 0 auto;
 }
 </style>
