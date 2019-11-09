@@ -72,7 +72,7 @@ export default {
       this.rows[2].value = DataList[0].runsBattedIn;
       this.rows[3].value = DataList[0].onBasePercentage;
       this.rows[4].value = DataList[0].sluggingPercentage;
-      this.rows[5].value = Number(DataList[0].onBasePercentage) + Number(DataList[0].sluggingPercentage);
+      this.rows[5].value = Math.round((Number(DataList[0].onBasePercentage) + Number(DataList[0].sluggingPercentage)) * 1000) / 1000;
       this.rows[6].value = this.calcWOBA(DataList[0]);
     },
     calcWOBA(data) {
@@ -86,7 +86,20 @@ export default {
       const atBats = data.atBats;
       const sacrificeFlies = data.sacrificeFlies;
 
-      const wOBA = (0.69 * (walk - intentionalWalk) + 0.73 * hitByPitch + 0.87 * singleHit + 1.29 * twoBaseHits + 1.74 * threeBaseHits + 2.07 * homeRuns) / (atBats + walk - intentionalWalk + sacrificeFlies + hitByPitch);
+      const wOBA = (
+        0.69 * (walk - intentionalWalk)
+        + 0.73 * hitByPitch
+        + 0.87 * singleHit
+        + 1.29 * twoBaseHits
+        + 1.74 * threeBaseHits
+        + 2.07 * homeRuns
+      ) / (
+        atBats
+        + walk
+        - intentionalWalk
+        + sacrificeFlies
+        + hitByPitch
+      );
 
       return Math.round(wOBA * 1000) / 1000;
     },

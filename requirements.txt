@@ -19,3 +19,5 @@ django-cors-headers==2.5.2
 lxml==4.3.4
 jupyter-contrib-nbextensions==0.5.1
 rise==5.5.1
+pyocr==0.7.2
+Pillow==6.1.0

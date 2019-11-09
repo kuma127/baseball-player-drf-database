@@ -1,5 +1,6 @@
 FROM python:3
 ENV PYTHONUNBUFFERED 1
+RUN apt update && apt -y install tesseract-ocr
 RUN mkdir /code
 WORKDIR /code
 COPY requirements.txt /code/

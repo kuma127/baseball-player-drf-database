@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>やきうの時間だあああああああ</h1>
+    <h1>やきうの時間だあああああああ ※2018年版</h1>
     <div class="inputData">
       <p>背番号：</p><input type="text" v-model="no">
     </div>
