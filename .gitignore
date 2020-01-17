@@ -108,6 +108,7 @@ baseball_player_front/node_modules/*
 
 # local file
 *.ipynb
+!Statistics_by_baseball.ipynb
 memo.txt
 BattingData180831.py
 *.csv
