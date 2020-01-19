@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>成績</h1>
+    <h1>成績({{ year }}度版)</h1>
     <vue-good-table
       class="stats-table"
       :columns="columns"
@@ -16,6 +16,7 @@ export default {
   name: 'BattingStats',
   data() {
     return {
+      year: '',
       playerStats: null,
       columns: [
         {
@@ -63,7 +64,7 @@ export default {
     async getStats() {
       const DataList = await BaseballClient.getFilteredBattingStats({
         playerId: this.$route.params.playerId,
-        year: 2018,
+        year: this.year,
       });
       this.playerStats = DataList[0];
       this.columns[1].label = DataList[0].player.name;
@@ -105,6 +106,7 @@ export default {
     },
   },
   created() {
+    this.year = this.$route.params.year;
     this.getStats();
   }
 }

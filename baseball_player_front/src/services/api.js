@@ -54,8 +54,8 @@ class BaseballClient extends Client {
         return response.data;
     }
 
-    async getFilteredPlayerData({no, name, team}) {
-        const response = await this._get(`${this.baseUrl}/players/?no=${no}&name=${name}&team=${team}`);
+    async getFilteredPlayerData({no, name, team, info_year}) {
+        const response = await this._get(`${this.baseUrl}/players/?no=${no}&name=${name}&team=${team}&info_year=${info_year}`);
         return response.data;
     }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>やきうの時間だあああああああ ※2018年版</h1>
+    <h1>選手名鑑</h1>
     <div class="inputData">
       <p>背番号：</p><input type="text" v-model="no">
     </div>
@@ -17,6 +17,14 @@
       </select>
     </div>
     <div class="inputData">
+      <p>年度：</p>
+      <select v-model="info_year">
+        <option v-for="year in yearList" v-bind:key="year" v-bind:value="year">
+          {{ year }}
+        </option>
+      </select>
+    </div>
+    <div class="inputData">
       <button @click="searchPlayer">検索</button>
       <button @click="clearData">クリア</button>
     </div>
@@ -27,10 +35,10 @@
       :rows="playerDataList">
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'name' && props.row.position == '投手'">
-          <router-link :to="{ path: '/pitching-stats/' + props.row.id }">{{props.row.name}}</router-link>
+          <router-link :to="{ path: '/pitching-stats/' + info_year + '/' + props.row.id }">{{props.row.name}}</router-link>
         </span>
         <span v-else-if="props.column.field == 'name' && props.row.position != '投手'">
-          <router-link :to="{ path: '/batting-stats/' + props.row.id }">{{props.row.name}}</router-link>
+          <router-link :to="{ path: '/batting-stats/' + info_year + '/' + props.row.id }">{{props.row.name}}</router-link>
         </span>
         <span v-else>
           {{props.formattedRow[props.column.field]}}
@@ -51,9 +59,11 @@ export default {
       playerDataList: [],
       playerId: 0,
       teamList: ['C', 'YS', 'G', 'YB', 'D', 'T', 'L', 'H', 'F', 'B', 'M', 'E'],
+      yearList: ['2020', '2019', '2018', '2017', '2016', '2015'],
       no: '',
       name: '',
       team: '',
+      info_year: '2020',
       columns: [
         {
           label: '背番号',
@@ -75,15 +85,12 @@ export default {
     }
   },
   methods: {
-    async testFunc(){
-      const response = await BaseballClient.getPlayerData(this.playerId);
-      this.playerData = response;
-    },
     async searchPlayer() {
       const response = await BaseballClient.getFilteredPlayerData({
         no: this.no,
         name: this.name,
-        team: this.team
+        team: this.team,
+        info_year: this.info_year
       });
       this.playerDataList = response;
     },

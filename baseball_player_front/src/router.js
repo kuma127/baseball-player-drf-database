@@ -10,8 +10,8 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         { path: '/', component: SearchPlayer },
-        { path: '/batting-stats/:playerId', component: BattingStats },
-        { path: '/pitching-stats/:playerId', component: PitchingStats },
+        { path: '/batting-stats/:year/:playerId', component: BattingStats },
+        { path: '/pitching-stats/:year/:playerId', component: PitchingStats },
         { path: '*', redirect: '/'},
     ]
 })
