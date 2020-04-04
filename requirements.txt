@@ -21,3 +21,4 @@ jupyter-contrib-nbextensions==0.5.1
 rise==5.5.1
 pyocr==0.7.2
 Pillow>=6.2.0
+scipy==1.4.1
