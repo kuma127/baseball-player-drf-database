@@ -197,3 +197,9 @@ def get_player_list(url, team, year):
     df['id'] = Player.objects.all().aggregate(Max('id'))['id__max'] + 1 + df.index
 
     return df
+
+def export_play_list_csv(url, team, year):
+    df = get_player_list(url, team, year)
+
+    # CSVの出力
+    df.to_csv('./PlayerList_' + team + '_' + str(year) + '.csv', encoding='utf-8')

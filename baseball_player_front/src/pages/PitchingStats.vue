@@ -16,6 +16,7 @@ export default {
   name: 'PitchingStats',
   data() {
     return {
+      year: '',
       playerStats: null,
       columns: [
         {
@@ -63,7 +64,7 @@ export default {
     async getStats() {
       const DataList = await BaseballClient.getFilteredPitchingStats({
         playerId: this.$route.params.playerId,
-        year: 2018,
+        year: this.year,
       });
       this.playerStats = DataList[0];
       this.columns[1].label = DataList[0].player.name;
@@ -77,6 +78,7 @@ export default {
     }
   },
   created() {
+    this.year = this.$route.params.year;
     this.getStats();
   }
 }
