@@ -115,3 +115,9 @@ BattingData180831.py
 jpn.traineddata
 SokuhoImg/*
 awesomebook/*
+*.numbers
+*.jpg
+*.png
+
+# sphinx
+sphinx_test/_build/*
