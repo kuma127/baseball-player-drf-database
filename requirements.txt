@@ -29,3 +29,5 @@ nbsphinx==0.7.0
 pandoc==1.0.2
 mypy==0.782
 Werkzeug==1.0.1
+aiohttp==3.6.2
+PyQt5==5.15.0
