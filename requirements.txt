@@ -29,7 +29,7 @@ nbsphinx==0.7.0
 pandoc==1.0.2
 mypy==0.782
 Werkzeug==1.0.1
-aiohttp==3.6.2
+aiohttp==3.7.4
 PyQt5==5.15.0
 plotly==4.14.3
 scikit-learn==0.24.1
