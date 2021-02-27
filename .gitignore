@@ -118,6 +118,7 @@ awesomebook/*
 *.numbers
 *.jpg
 *.png
+*.db
 
 # sphinx
 sphinx_test/_build/*
