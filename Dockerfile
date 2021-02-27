@@ -1,6 +1,6 @@
 FROM python:3
 ENV PYTHONUNBUFFERED 1
-RUN apt update && apt -y install tesseract-ocr pandoc libgl1-mesa-dev
+RUN apt update && apt -y install tesseract-ocr pandoc libgl1-mesa-dev mecab libmecab-dev mecab-ipadic-utf8
 RUN mkdir /code
 WORKDIR /code
 COPY requirements.txt /code/
