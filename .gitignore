@@ -122,3 +122,6 @@ awesomebook/*
 
 # sphinx
 sphinx_test/_build/*
+
+# Math-for-Programmers-master
+Math-for-Programmers-master/*
